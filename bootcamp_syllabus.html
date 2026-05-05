@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Python & Mathematics Bootcamp — Rutgers SC&I</title>
+<title>MI Program Summer 2026: Introductory Python &amp; Mathematics Bootcamp</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
@@ -11,40 +11,43 @@
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
-    --navy: #0d1b2a;
-    --navy-mid: #1a2d42;
-    --navy-light: #243850;
-    --amber: #d4882a;
-    --amber-light: #e8a84e;
-    --amber-pale: #fdf3e1;
-    --cream: #faf8f4;
-    --text: #1a1a1a;
-    --text-mid: #3d4047;
-    --text-muted: #6b7280;
-    --border: #e2ddd5;
-    --border-dark: #c8c2b8;
+    --slate: #5C6FA0;
+    --slate-mid: #6D80B0;
+    --slate-light: #8898C2;
+    --peach: #E8956A;
+    --peach-light: #F0AA85;
+    --peach-pale: #FEF4EE;
+    --bg: #F6F4FB;
+    --sage: #6BA890;
+    --sage-pale: #EDF6F2;
+    --lavender-pale: #EEEAFC;
+    --text: #2D3748;
+    --text-mid: #4A5568;
+    --text-muted: #718096;
+    --border: #DDD7EE;
+    --border-dark: #C8BEE0;
     --white: #ffffff;
     --scarlet: #cc0033;
   }
   html { scroll-behavior: smooth; }
   body {
     font-family: 'DM Sans', sans-serif;
-    background: var(--cream);
+    background: var(--bg);
     color: var(--text);
     line-height: 1.7;
     font-size: 16px;
   }
   #root { min-height: 100vh; }
 
-  /* Header */
+  /* ── Header ── */
   .site-header {
-    background: var(--navy);
+    background: var(--slate);
     color: white;
     padding: 0;
     position: sticky;
     top: 0;
     z-index: 100;
-    border-bottom: 3px solid var(--amber);
+    border-bottom: 3px solid var(--peach);
   }
   .header-inner {
     max-width: 1100px;
@@ -58,17 +61,14 @@
   .header-brand {
     font-family: 'Playfair Display', serif;
     font-size: 1rem;
-    color: var(--amber-light);
+    color: var(--peach-light);
     letter-spacing: 0.01em;
   }
-  .header-nav {
-    display: flex;
-    gap: 0.25rem;
-  }
+  .header-nav { display: flex; gap: 0.25rem; align-items: center; }
   .nav-btn {
     background: none;
     border: none;
-    color: rgba(255,255,255,0.65);
+    color: rgba(255,255,255,0.75);
     font-family: 'DM Sans', sans-serif;
     font-size: 0.8rem;
     padding: 0.35rem 0.75rem;
@@ -77,18 +77,33 @@
     transition: color 0.2s, background 0.2s;
     letter-spacing: 0.02em;
   }
-  .nav-btn:hover { color: white; background: rgba(255,255,255,0.08); }
-  .nav-btn.active { color: var(--amber-light); }
+  .nav-btn:hover { color: white; background: rgba(255,255,255,0.12); }
+  .nav-btn.active { color: var(--peach-light); }
+  .nav-divider { width: 1px; height: 22px; background: rgba(255,255,255,0.2); margin: 0 0.4rem; }
+  .page-tab {
+    display: inline-block;
+    background: none;
+    border: 1.5px solid rgba(255,255,255,0.3);
+    color: rgba(255,255,255,0.8);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    padding: 0.28rem 0.85rem;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.01em;
+    line-height: 1.5;
+    vertical-align: middle;
+    box-sizing: border-box;
+  }
+  .page-tab:hover { color: white; border-color: rgba(255,255,255,0.55); }
+  .page-tab.active { color: var(--slate); background: white; border-color: white; font-weight: 500; }
 
-  /* Download button */
-
-
-  /* Hero */
+  /* ── Hero ── */
   .hero {
-    background: var(--navy);
+    background: linear-gradient(140deg, var(--slate) 0%, var(--slate-mid) 55%, #8898C8 100%);
     color: white;
     padding: 4.5rem 2rem 3.5rem;
-    border-bottom: 1px solid var(--navy-light);
   }
   .hero-inner {
     max-width: 1100px;
@@ -101,58 +116,67 @@
   .hero-institution {
     font-family: 'DM Mono', monospace;
     font-size: 0.75rem;
-    color: var(--amber);
+    color: var(--peach-light);
     letter-spacing: 0.12em;
     text-transform: uppercase;
     margin-bottom: 1rem;
   }
   .hero-title {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(2rem, 4vw, 3.25rem);
+    font-size: clamp(1.75rem, 3.5vw, 2.85rem);
     font-weight: 700;
-    line-height: 1.15;
+    line-height: 1.2;
     color: white;
     margin-bottom: 0.75rem;
   }
   .hero-subtitle {
     font-size: 1rem;
-    color: rgba(255,255,255,0.6);
+    color: rgba(255,255,255,0.85);
     font-weight: 300;
+    max-width: 560px;
+    line-height: 1.65;
   }
-  .hero-meta {
-    text-align: right;
-    min-width: 200px;
-  }
+  .hero-meta { text-align: right; min-width: 200px; }
   .hero-badge {
     display: inline-block;
-    background: var(--amber);
-    color: var(--navy);
+    background: var(--peach);
+    color: white;
     font-family: 'DM Mono', monospace;
     font-size: 0.72rem;
     font-weight: 500;
-    padding: 0.3rem 0.8rem;
-    border-radius: 3px;
+    padding: 0.3rem 0.9rem;
+    border-radius: 20px;
     letter-spacing: 0.06em;
     margin-bottom: 1rem;
   }
   .hero-date {
     font-family: 'Playfair Display', serif;
     font-size: 1.1rem;
-    color: rgba(255,255,255,0.85);
+    color: rgba(255,255,255,0.92);
     line-height: 1.4;
   }
-  .hero-instructor {
-    font-size: 0.82rem;
-    color: rgba(255,255,255,0.5);
-    margin-top: 0.5rem;
-  }
-  .hero-instructor a { color: var(--amber); text-decoration: none; }
+  .hero-instructor { font-size: 0.82rem; color: rgba(255,255,255,0.6); margin-top: 0.5rem; }
+  .hero-instructor a { color: var(--peach-light); text-decoration: none; }
 
-  /* Info strip */
-  .info-strip {
-    background: var(--navy-mid);
-    border-bottom: 1px solid var(--navy-light);
+  /* ── Welcome banner ── */
+  .welcome-banner {
+    background: linear-gradient(135deg, var(--lavender-pale) 0%, var(--peach-pale) 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 1.1rem 2rem;
   }
+  .welcome-banner-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+  }
+  .welcome-emoji { font-size: 1.35rem; flex-shrink: 0; }
+  .welcome-text { font-size: 0.88rem; color: var(--text-mid); line-height: 1.55; }
+  .welcome-text strong { color: var(--slate); }
+
+  /* ── Info strip ── */
+  .info-strip { background: var(--slate-mid); }
   .info-strip-inner {
     max-width: 1100px;
     margin: 0 auto;
@@ -165,28 +189,21 @@
   .info-label {
     font-family: 'DM Mono', monospace;
     font-size: 0.68rem;
-    color: var(--amber);
+    color: var(--peach-light);
     letter-spacing: 0.1em;
     text-transform: uppercase;
   }
-  .info-value { font-size: 0.87rem; color: rgba(255,255,255,0.8); }
+  .info-value { font-size: 0.87rem; color: rgba(255,255,255,0.88); }
 
-  /* Main layout */
+  /* ── Main layout ── */
   .page-body {
-    max-width: 1100px;
+    max-width: 860px;
     margin: 0 auto;
     padding: 3rem 2rem;
-    display: grid;
-    grid-template-columns: 220px 1fr;
-    gap: 3rem;
-    align-items: start;
   }
 
-  /* Sidebar */
-  .sidebar {
-    position: sticky;
-    top: 72px;
-  }
+  /* ── Sidebar ── */
+  .sidebar { position: sticky; top: 72px; }
   .sidebar-section { margin-bottom: 2rem; }
   .sidebar-label {
     font-family: 'DM Mono', monospace;
@@ -208,14 +225,19 @@
     border-left: 2px solid transparent;
     transition: all 0.15s;
     margin-bottom: 0.1rem;
+    background: none;
+    border-right: none;
+    border-top: none;
+    border-bottom-color: transparent;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
   }
-  .sidebar-link:hover { background: rgba(212,136,42,0.08); border-left-color: var(--amber); color: var(--amber); }
+  .sidebar-link:hover { background: rgba(91,111,160,0.07); border-left-color: var(--peach); color: var(--slate); }
   .sidebar-link.week-link { font-family: 'DM Mono', monospace; font-size: 0.78rem; }
 
-  /* Content area */
+  /* ── Content ── */
   .content { min-width: 0; }
-
-  /* Section styling */
   .section { margin-bottom: 3.5rem; scroll-margin-top: 80px; }
   .section-header {
     display: flex;
@@ -228,28 +250,23 @@
   .section-number {
     font-family: 'DM Mono', monospace;
     font-size: 0.72rem;
-    color: var(--amber);
+    color: var(--peach);
     letter-spacing: 0.06em;
   }
   .section-title {
     font-family: 'Playfair Display', serif;
     font-size: 1.5rem;
     font-weight: 600;
-    color: var(--navy);
+    color: var(--slate);
   }
   .section p { color: var(--text-mid); margin-bottom: 1rem; line-height: 1.8; }
   .section p:last-child { margin-bottom: 0; }
 
-  /* Overview table */
-  .overview-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.87rem;
-    margin: 1rem 0;
-  }
+  /* ── Overview table ── */
+  .overview-table { width: 100%; border-collapse: collapse; font-size: 0.87rem; margin: 1rem 0; }
   .overview-table th {
-    background: var(--navy);
-    color: var(--amber-light);
+    background: var(--slate);
+    color: var(--peach-light);
     font-family: 'DM Mono', monospace;
     font-size: 0.7rem;
     letter-spacing: 0.08em;
@@ -265,54 +282,14 @@
     vertical-align: top;
   }
   .overview-table tr:last-child td { border-bottom: none; }
-  .overview-table tr:nth-child(even) td { background: rgba(0,0,0,0.02); }
-  .overview-table tr:hover td { background: var(--amber-pale); }
-  .week-num {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.78rem;
-    color: var(--amber);
-    font-weight: 500;
-    white-space: nowrap;
-  }
-  .capstone-row td { background: var(--amber-pale) !important; }
-  .capstone-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.7rem;
-    color: var(--amber);
-    letter-spacing: 0.04em;
-  }
+  .overview-table tr:nth-child(even) td { background: rgba(91,111,160,0.03); }
+  .overview-table tr:hover td { background: var(--peach-pale); }
+  .week-num { font-family: 'DM Mono', monospace; font-size: 0.78rem; color: var(--peach); font-weight: 500; white-space: nowrap; }
+  .capstone-row td { background: var(--peach-pale) !important; }
+  .capstone-label { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--peach); letter-spacing: 0.04em; }
 
-  /* Info table */
-  .info-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.87rem;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    overflow: hidden;
-  }
-  .info-table td {
-    padding: 0.75rem 1rem;
-    border-bottom: 1px solid var(--border);
-    vertical-align: top;
-  }
-  .info-table tr:last-child td { border-bottom: none; }
-  .info-table td:first-child {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.75rem;
-    color: var(--text-muted);
-    letter-spacing: 0.04em;
-    white-space: nowrap;
-    background: var(--cream);
-    width: 180px;
-  }
-
-  /* Learning objectives */
-  .objectives-list {
-    list-style: none;
-    display: grid;
-    gap: 0.6rem;
-  }
+  /* ── Learning objectives ── */
+  .objectives-list { list-style: none; display: grid; gap: 0.6rem; }
   .objective-item {
     display: flex;
     align-items: flex-start;
@@ -320,58 +297,54 @@
     padding: 0.75rem 1rem;
     background: white;
     border: 1px solid var(--border);
-    border-left: 3px solid var(--amber);
+    border-left: 3px solid var(--sage);
     border-radius: 0 6px 6px 0;
     font-size: 0.88rem;
     color: var(--text-mid);
     line-height: 1.6;
   }
-  .obj-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--amber);
-    flex-shrink: 0;
-    margin-top: 0.45rem;
-  }
+  .obj-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--sage); flex-shrink: 0; margin-top: 0.45rem; }
 
-  /* Resources */
-  .resources-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 1rem;
-  }
-  .resource-card {
+  /* ── Assessment ── */
+  .assessment-card {
     background: white;
     border: 1px solid var(--border);
     border-radius: 8px;
-    padding: 1.25rem;
-    border-top: 3px solid var(--navy);
+    padding: 1.5rem;
+    margin-bottom: 1.25rem;
   }
-  .resource-name {
+  .assessment-title {
     font-family: 'Playfair Display', serif;
-    font-size: 0.95rem;
+    font-size: 1rem;
     font-weight: 600;
-    color: var(--navy);
+    color: var(--slate);
     margin-bottom: 0.5rem;
-    line-height: 1.35;
   }
-  .resource-desc { font-size: 0.82rem; color: var(--text-muted); line-height: 1.55; }
-  .resource-link {
-    display: inline-block;
-    margin-top: 0.6rem;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.72rem;
-    color: var(--amber);
-    text-decoration: none;
-    letter-spacing: 0.02em;
-  }
-  .resource-link:hover { text-decoration: underline; }
+  .assessment-desc { font-size: 0.87rem; color: var(--text-muted); line-height: 1.65; }
 
-  /* Week sections */
+  /* ── Milestone box ── */
+  .milestone-box {
+    background: var(--peach-pale);
+    border: 1px solid #F0C4A8;
+    border-left: 4px solid var(--peach);
+    border-radius: 0 6px 6px 0;
+    padding: 1.25rem 1.5rem;
+    margin: 1.5rem 1.75rem;
+  }
+  .milestone-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--peach);
+    margin-bottom: 0.5rem;
+  }
+  .milestone-text { font-size: 0.87rem; color: var(--text-mid); line-height: 1.65; }
+
+  /* ── Week sections ── */
   .week-section { scroll-margin-top: 80px; margin-bottom: 3rem; }
   .week-header {
-    background: var(--navy);
+    background: linear-gradient(135deg, var(--slate) 0%, var(--slate-mid) 100%);
     color: white;
     padding: 1.5rem 1.75rem;
     border-radius: 8px 8px 0 0;
@@ -381,24 +354,9 @@
     gap: 1rem;
     flex-wrap: wrap;
   }
-  .week-badge {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.72rem;
-    color: var(--amber);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-  .week-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.3rem;
-    font-weight: 700;
-    flex: 1;
-  }
-  .week-date {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.78rem;
-    color: rgba(255,255,255,0.5);
-  }
+  .week-badge { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--peach-light); letter-spacing: 0.08em; text-transform: uppercase; }
+  .week-title { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; flex: 1; }
+  .week-date { font-family: 'DM Mono', monospace; font-size: 0.78rem; color: rgba(255,255,255,0.55); }
   .week-body {
     background: white;
     border: 1px solid var(--border);
@@ -413,70 +371,27 @@
     font-size: 0.72rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--amber);
+    color: var(--slate);
     margin-bottom: 1rem;
   }
-  .session-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-  }
-  .session-item {
-    display: flex;
-    gap: 0.75rem;
-    font-size: 0.87rem;
-    color: var(--text-mid);
-    line-height: 1.5;
-    align-items: flex-start;
-  }
-  .session-dash {
-    color: var(--amber);
-    font-family: 'DM Mono', monospace;
-    flex-shrink: 0;
-    margin-top: 0.1rem;
-  }
+  .session-list { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+  .session-item { display: flex; gap: 0.75rem; font-size: 0.87rem; color: var(--text-mid); line-height: 1.5; align-items: flex-start; }
+  .session-dash { color: var(--peach); font-family: 'DM Mono', monospace; flex-shrink: 0; margin-top: 0.1rem; }
 
-  /* Milestone */
-  .milestone-box {
-    background: var(--amber-pale);
-    border: 1px solid #e8c882;
-    border-left: 4px solid var(--amber);
-    border-radius: 0 6px 6px 0;
-    padding: 1.25rem 1.5rem;
-    margin: 1.5rem 1.75rem;
+  /* ── Sessions page header ── */
+  .sessions-page-header {
+    background: linear-gradient(135deg, var(--lavender-pale) 0%, var(--peach-pale) 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 2.25rem 2rem 2rem;
   }
-  .milestone-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--amber);
-    margin-bottom: 0.5rem;
-  }
-  .milestone-text { font-size: 0.87rem; color: var(--text-mid); line-height: 1.65; }
+  .sessions-page-header-inner { max-width: 1100px; margin: 0 auto; }
+  .sessions-page-title { font-family: 'Playfair Display', serif; font-size: 1.75rem; color: var(--slate); margin-bottom: 0.5rem; }
+  .sessions-page-desc { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; max-width: 580px; }
 
-  /* Assessment */
-  .assessment-card {
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 1.5rem;
-    margin-bottom: 1.25rem;
-  }
-  .assessment-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--navy);
-    margin-bottom: 0.5rem;
-  }
-  .assessment-desc { font-size: 0.87rem; color: var(--text-muted); line-height: 1.65; }
-
-  /* Footer */
+  /* ── Footer ── */
   .page-footer {
-    background: var(--navy);
-    color: rgba(255,255,255,0.4);
+    background: var(--slate);
+    color: rgba(255,255,255,0.45);
     text-align: center;
     padding: 2rem;
     font-size: 0.78rem;
@@ -484,7 +399,7 @@
     font-family: 'DM Mono', monospace;
     letter-spacing: 0.04em;
   }
-  .page-footer a { color: var(--amber); text-decoration: none; }
+  .page-footer a { color: var(--peach-light); text-decoration: none; }
 
   @media (max-width: 760px) {
     .page-body { grid-template-columns: 1fr; }
@@ -508,7 +423,7 @@ const weekData = [
     num: 1,
     title: "Python Foundations & Data Libraries",
     date: "August 3, 2026",
-    description: "This week compresses Weeks 1–2 of the standard six-week curriculum. Students arrive having completed LinkedIn Learning Python fundamentals pre-work and are introduced to the full Python and data-library stack in a single intensive session.",
+    description: "We begin with the building blocks of Python and introduce the core libraries you'll rely on throughout the program. Students arrive having completed the LinkedIn Learning pre-work, so this session moves from fundamentals directly into hands-on work with real data.",
     session: [
       "Welcome and course orientation; Rutgers SC&I Data Science Concentration overview and bootcamp goals",
       "Environment setup: Jupyter Notebooks and Google Colab; introduction to the course platform",
@@ -532,7 +447,7 @@ const weekData = [
     num: 2,
     title: "Data Wrangling, Visualization & Statistics",
     date: "August 10, 2026",
-    description: "This week compresses Weeks 3–4 of the standard curriculum, moving from data cleaning and visualization through descriptive statistics, probability, and linear algebra intuition — all implemented in Python with real datasets.",
+    description: "This week you'll learn how to clean messy data and turn it into clear visuals, two of the most practical skills in data science. We also introduce core statistical ideas and build intuition for linear algebra through hands-on Python examples.",
     session: [
       "Handling missing data: detection, imputation strategies, and when to drop",
       "Merging and reshaping datasets: concat, merge, melt, and pivot",
@@ -555,9 +470,9 @@ const weekData = [
   {
     id: "week3",
     num: 3,
-    title: "Calculus for ML & Regression",
+    title: "Calculus Intuition & Regression",
     date: "August 17, 2026",
-    description: "This week covers Week 5 content from the standard curriculum. Students move from calculus intuition through linear regression, building toward the full ML pipeline that forms the Week 4 capstone.",
+    description: "Don't worry: you don't need calculus fluency to succeed here. This week we build visual intuition for how models 'learn,' then apply those ideas directly to linear regression. By the end, you'll have trained your first machine-learning model.",
     session: [
       "Derivatives as rates of change: intuition first, notation second",
       "Gradient descent: visualizing cost functions and how models 'learn'",
@@ -582,7 +497,7 @@ const weekData = [
     title: "Capstone: Applied ML Workflow",
     date: "August 24, 2026",
     capstone: true,
-    description: "The capstone session brings the full bootcamp together. Students apply the complete ML pipeline to a domain-relevant dataset of their choosing and present their work to the group. This session also orients students to the four-course core sequence they will begin in the fall.",
+    description: "This is your moment to bring everything together! You'll apply the complete ML pipeline to a dataset you care about and share your work with the group. We'll also walk you through the fall core courses so you feel ready and confident for what comes next.",
     session: [
       "Review of the full ML pipeline: load → clean → feature engineer → train → evaluate",
       "Connecting the bootcamp to the four-course core: MI 547 (Data Curation), MI 552 (Computational Reasoning), MI 564 (Machine Learning for Data Science), and the Neural Networks course",
@@ -592,7 +507,7 @@ const weekData = [
     async: [
       "Complete and submit Final Milestone Jupyter Notebook",
       "Prepare 5–7 minute presentation for synchronous session",
-      "fast.ai: Practical Deep Learning for Coders (optional preview of neural networks for students who want a head start on the Neural Networks core course)",
+      "fast.ai: Practical Deep Learning for Coders (optional: a preview of neural networks for students who want an early look at what's ahead)",
     ],
     milestone: "Submit a complete Jupyter Notebook demonstrating the full ML pipeline (data ingestion, cleaning, feature engineering, model training, and evaluation) on a real dataset of your choosing. Datasets should be drawn from domains relevant to communication, information science, public health, social science, or another area of personal interest. Present your work (5–7 minutes) during the Week 4 synchronous session.",
   },
@@ -601,15 +516,8 @@ const weekData = [
 const overviewRows = [
   { week: "Week 1", title: "Python Foundations & Data Libraries", topics: "Data types, control flow, functions, NumPy, Pandas, DataFrames, CSV I/O", milestone: "Script: load, filter, and answer a research question with Pandas" },
   { week: "Week 2", title: "Data Wrangling, Visualization & Statistics", topics: "Missing data, merging, Matplotlib, Seaborn, descriptive stats, probability, linear algebra intuition", milestone: "Three visualizations + statistical analysis of a chosen public dataset" },
-  { week: "Week 3", title: "Calculus for ML & Regression", topics: "Gradient descent, loss functions, linear regression, scikit-learn, RMSE, R², bias-variance", milestone: "Regression model with RMSE/R² interpretation" },
+  { week: "Week 3", title: "Calculus Intuition & Regression", topics: "Gradient descent, loss functions, linear regression, scikit-learn, RMSE, R², bias-variance", milestone: "Regression model with RMSE/R² interpretation" },
   { week: "Week 4 ★", title: "Capstone: Applied ML Workflow", topics: "Full pipeline: load → clean → feature engineer → train → evaluate → present", milestone: "★ FINAL: Full ML pipeline notebook + live presentation", capstone: true },
-];
-
-const resources = [
-  { name: "Foundational Math for Machine Learning", provider: "LinkedIn Learning", desc: "Covers linear algebra, calculus, and statistics for ML. Assigned as pre-bootcamp self-paced work beginning July 20.", url: "https://linkedin.com/learning/paths/foundational-math-for-machine-learning" },
-  { name: "Microsoft DAT256X — Essential Math for ML", provider: "GitHub (Open Source)", desc: "Open-source Jupyter notebook course from Microsoft: vectors, matrices, calculus, and probability in Python. Primary exercise source for Week 2 math content.", url: "https://github.com/JeffWang0325/Microsoft-DAT256X-Essential-Math-for-Machine-Learning-Python-Edition" },
-  { name: "Python for Data Analysis", provider: "Wes McKinney (O'Reilly)", desc: "Standard reference for NumPy, Pandas, and data wrangling. Chapters 2–5 cover Weeks 1–2 content. Free third edition online.", url: "https://wesmckinney.com/book" },
-  { name: "Practical Deep Learning for Coders", provider: "fast.ai", desc: "Recommended supplemental reading for advanced students or those who want a preview of neural network content.", url: "https://course.fast.ai" },
 ];
 
 function scrollTo(id) {
@@ -627,7 +535,7 @@ function NavBtn({ label, sectionId }) {
 function WeekSection({ w }) {
   return (
     <div className="week-section" id={w.id}>
-      <div className="week-header" style={w.capstone ? { background: "#3a2200" } : {}}>
+      <div className="week-header" style={w.capstone ? { background: "linear-gradient(135deg, #8B6BAE 0%, #A07FC0 100%)" } : {}}>
         <div>
           <div className="week-badge">Week {w.num}</div>
           <div className="week-title">{w.title}</div>
@@ -638,9 +546,8 @@ function WeekSection({ w }) {
         <div className="week-subsection">
           <p style={{ fontSize: "0.88rem", color: "#4b5563", lineHeight: "1.75" }}>{w.description}</p>
         </div>
-
         <div className="week-subsection">
-          <div className="week-sub-title">Synchronous Session — 3 hours</div>
+          <div className="week-sub-title">Synchronous Session (3 hours)</div>
           <ul className="session-list">
             {w.session.map((item, i) => (
               <li key={i} className="session-item">
@@ -650,7 +557,6 @@ function WeekSection({ w }) {
             ))}
           </ul>
         </div>
-
         <div className="week-subsection">
           <div className="week-sub-title">Asynchronous Work</div>
           <ul className="session-list">
@@ -662,9 +568,8 @@ function WeekSection({ w }) {
             ))}
           </ul>
         </div>
-
         <div className="milestone-box">
-          <div className="milestone-label">{w.capstone ? "★ Final Milestone — Capstone Project" : `Week ${w.num} Milestone`}</div>
+          <div className="milestone-label">{w.capstone ? "★ Final Milestone: Capstone Project" : `Week ${w.num} Milestone`}</div>
           <div className="milestone-text">{w.milestone}</div>
         </div>
       </div>
@@ -673,31 +578,40 @@ function WeekSection({ w }) {
 }
 
 function App() {
+  const [page, setPage] = useState('home');
+
   return (
     <div>
+      {/* ── Sticky Header ── */}
       <header className="site-header">
         <div className="header-inner">
-          <span className="header-brand"><span style={{color:'var(--scarlet)'}}>Rutgers</span> SC&I · Data Science Bootcamp</span>
+          <span className="header-brand"><span style={{color:'var(--peach-light)'}}>Rutgers</span> SC&amp;I · MI Program Bootcamp</span>
           <nav className="header-nav">
-            <NavBtn label="Overview" sectionId="description" />
-            <NavBtn label="Objectives" sectionId="objectives" />
-            <NavBtn label="Schedule" sectionId="schedule" />
-            <NavBtn label="Resources" sectionId="resources" />
-            <NavBtn label="Assessment" sectionId="assessment" />
+            {page === 'home' ? (
+              <>
+                <NavBtn label="Overview" sectionId="description" />
+                <NavBtn label="Objectives" sectionId="objectives" />
+                <NavBtn label="Schedule" sectionId="schedule" />
+                <span className="nav-divider" />
+              </>
+            ) : null}
+            <button className={`page-tab ${page === 'home' ? 'active' : ''}`} onClick={() => setPage('home')}>🏠 Home</button>
+            <button className={`page-tab ${page === 'sessions' ? 'active' : ''}`} onClick={() => setPage('sessions')}>Weekly Sessions</button>
+            <a href="http://sites.comminfo.rutgers.edu/tammari/wp-content/uploads/sites/14/2026/05/bootcamp_4week_august2026_syllabus_april_28.pdf" target="_blank" rel="noreferrer" className="page-tab" style={{ textDecoration: "none" }}>Syllabus ↗</a>
           </nav>
-
         </div>
       </header>
 
+      {/* ── Hero (shared) ── */}
       <div className="hero">
         <div className="hero-inner">
           <div>
-            <div className="hero-institution"><span style={{color:'var(--scarlet)'}}>Rutgers</span> University · School of Communication &amp; Information · Data Science Concentration</div>
-            <h1 className="hero-title">Python &amp; Mathematics Bootcamp</h1>
-            <p className="hero-subtitle">A condensed foundations course in Python programming and essential mathematics for data science.</p>
+            <div className="hero-institution"><span style={{color:'#F4A68A'}}>Rutgers</span> University · School of Communication &amp; Information · MI Program</div>
+            <h1 className="hero-title">MI Program Summer 2026<br/>Introductory Python &amp; Mathematics Bootcamp</h1>
+            <p className="hero-subtitle">A friendly, step-by-step introduction to Python programming and the mathematics behind data science. No prior experience needed.</p>
           </div>
           <div className="hero-meta">
-            <div className="hero-badge">Four-Week Intensive</div>
+            <div className="hero-badge">Four-Week Journey</div>
             <div className="hero-date">August 3–28<br/>2026</div>
             <div className="hero-instructor">
               Tawfiq Ammari<br/>
@@ -707,13 +621,24 @@ function App() {
         </div>
       </div>
 
+      {/* ── Welcome Banner ── */}
+      <div className="welcome-banner">
+        <div className="welcome-banner-inner">
+          <span className="welcome-emoji">👋</span>
+          <p className="welcome-text">
+            <strong>New to coding? You're in exactly the right place.</strong> This bootcamp was designed for students coming from communications, public health, journalism, and beyond. Many of them had never written a line of code before. We'll go step by step, together.
+          </p>
+        </div>
+      </div>
+
+      {/* ── Info Strip ── */}
       <div className="info-strip">
         <div className="info-strip-inner">
           {[
-            ["Format", "1 × 3-hr synchronous session/week + async"],
-            ["Modality", "Online — Zoom + Canvas"],
+            ["Format", "1 × 3-hr session/week + self-paced work"],
+            ["Modality", "Online via Zoom + Canvas"],
             ["Audience", "Incoming & current SC&I graduate students"],
-            ["Weekly Commitment", "10–12 hours"],
+            ["Weekly Commitment", "~8–12 hours"],
             ["Assessment", "Weekly milestones + capstone project"],
           ].map(([label, val]) => (
             <div className="info-item" key={label}>
@@ -724,178 +649,154 @@ function App() {
         </div>
       </div>
 
-      <div className="page-body">
-        <aside className="sidebar">
-          <div className="sidebar-section">
-            <div className="sidebar-label">Sections</div>
-            {[
-              ["description", "Course Overview"],
-              ["description", "Description"],
-              ["objectives", "Learning Objectives"],
-              ["philosophy", "Teaching Philosophy"],
-              ["resources", "Resources"],
-              ["assessment", "Assessment"],
-              ["schedule", "Four-Week Overview"],
-            ].map(([id, label]) => (
-              <button key={id+label} onClick={() => scrollTo(id)} className="sidebar-link" style={{ background: "none", border: "none", width: "100%", textAlign: "left", cursor: "pointer", display: "block" }}>{label}</button>
-            ))}
-          </div>
-          <div className="sidebar-section">
-            <div className="sidebar-label">Weekly Sessions</div>
-            {weekData.map(w => (
-              <button key={w.id} onClick={() => scrollTo(w.id)} className="sidebar-link week-link" style={{ background: "none", border: "none", width: "100%", textAlign: "left", cursor: "pointer", display: "block" }}>
-                W{w.num} · {w.title.split(":")[0]}
-              </button>
-            ))}
-          </div>
-        </aside>
+      {/* ══════════════════════════════════
+           PAGE: SYLLABUS
+          ══════════════════════════════════ */}
+      {page === 'home' && (
+        <div className="page-body">
+          <main className="content">
 
-        <main className="content">
+            {/* 01 Course Description */}
+            <section className="section" id="description">
+              <div className="section-header">
+                <span className="section-number">01</span>
+                <h2 className="section-title">Course Overview</h2>
+              </div>
+              <p>Welcome to the SC&amp;I Introductory Python &amp; Mathematics Bootcamp! This four-week course is designed to gently introduce you to the programming skills and mathematical ideas that will support your work in the Data Science Concentration. The August 2026 cohort is a pilot. Students will be followed into the fall semester so we can learn together and improve future offerings.</p>
+              <p>This course doesn't ask you to become a software engineer or a mathematician. The goal is <strong>conceptual fluency</strong>: understanding what your code does and being able to explain the tools you use. In an era of AI-assisted coding, the ability to reason clearly about technical choices is the most valuable skill you can develop.</p>
+              <p>By the end of the course, you'll have written real, working Python code with industry-standard libraries, built and evaluated a basic machine-learning pipeline, and developed a working intuition for the statistics and linear algebra you'll encounter throughout the program.</p>
+              <p>This course was built for students coming from communications, journalism, economics, public health, and related fields, many of whom have little or no prior programming or math background. <strong>If you've never written a line of code before, you're in exactly the right place.</strong></p>
+            </section>
 
-          {/* Course Description */}
-          <section className="section" id="description">
-            <div className="section-header">
-              <span className="section-number">01</span>
-              <h2 className="section-title">Course Description</h2>
-            </div>
-            <p>The SC&amp;I Python &amp; Mathematics Bootcamp is a four-week intensive preparatory course designed to build the programming fluency and quantitative reasoning that incoming Data Science Concentration students need to succeed in the graduate core sequence. This August 2026 cohort is a pilot: students will be followed throughout the fall semester to gather structured feedback that will inform future iterations.</p>
-            <p>The bootcamp does not aim to train computer scientists or software engineers. The goal is <strong>conceptual fluency</strong>. Students must understand the tools they use and the models they explain, even in an era of AI-assisted coding.</p>
-            <p>Students will leave the bootcamp having written real, working Python code using industry-standard libraries; built and evaluated a basic machine learning pipeline; and developed the statistical and linear-algebraic intuition that underpins all downstream coursework in the concentration.</p>
-            <p>Designed for students from varied academic backgrounds — communications, journalism, economics, public health — who may have limited prior programming or statistical training. <strong>No prior coding experience is required.</strong></p>
-          </section>
+            {/* 02 Learning Objectives */}
+            <section className="section" id="objectives">
+              <div className="section-header">
+                <span className="section-number">02</span>
+                <h2 className="section-title">What You'll Be Able to Do</h2>
+              </div>
+              <ul className="objectives-list">
+                {[
+                  "Set up and navigate a Python environment (Jupyter Notebooks / Google Colab). We'll set this up together in Week 1",
+                  "Write Python scripts using core data structures: lists, dictionaries, NumPy arrays, and Pandas DataFrames",
+                  "Load, clean, and explore real-world datasets drawn from social-science contexts (survey data, public health records, census microdata, social media corpora)",
+                  "Produce clear data visualizations using Matplotlib and Seaborn",
+                  "Apply core concepts in descriptive statistics and probability (mean, variance, distributions, Bayes' theorem)",
+                  "Understand and apply linear algebra fundamentals (vectors, matrices, dot products) through Python code",
+                  "Build and evaluate a linear regression model using scikit-learn",
+                  "Understand gradient descent and loss functions through visual and conceptual exploration",
+                  "Execute a complete machine learning pipeline from data ingestion to model evaluation",
+                  "Articulate, in writing and code, how technical choices affect data analysis outcomes",
+                ].map((obj, i) => (
+                  <li key={i} className="objective-item">
+                    <span className="obj-dot"></span>
+                    <span>{obj}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
 
-          {/* Learning Objectives */}
-          <section className="section" id="objectives">
-            <div className="section-header">
-              <span className="section-number">02</span>
-              <h2 className="section-title">Learning Objectives</h2>
-            </div>
-            <ul className="objectives-list">
-              {[
-                "Set up and navigate a Python development environment (Jupyter Notebooks / Google Colab)",
-                "Write Python scripts using core data structures: lists, dictionaries, NumPy arrays, and Pandas DataFrames",
-                "Load, clean, and explore real-world datasets drawn from social-science contexts (survey data, public health records, census microdata, social media corpora)",
-                "Produce clear data visualizations using Matplotlib and Seaborn",
-                "Apply core concepts in descriptive statistics and probability (mean, variance, distributions, Bayes' theorem)",
-                "Understand and apply linear algebra fundamentals (vectors, matrices, dot products) through Python code",
-                "Build and evaluate a linear regression model using scikit-learn",
-                "Interpret gradient descent and loss functions conceptually and visually",
-                "Execute a complete machine learning pipeline from data ingestion to model evaluation",
-                "Articulate, in writing and code, how technical choices affect data analysis outcomes",
-              ].map((obj, i) => (
-                <li key={i} className="objective-item">
-                  <span className="obj-dot"></span>
-                  <span>{obj}</span>
-                </li>
-              ))}
-            </ul>
-          </section>
+            {/* 03 Teaching Philosophy */}
+            <section className="section" id="philosophy">
+              <div className="section-header">
+                <span className="section-number">03</span>
+                <h2 className="section-title">Teaching Approach</h2>
+              </div>
+              <p>The course centers on <strong>conceptual understanding</strong>. Rather than memorizing syntax, you'll learn to understand and explain what your code is doing. The Data Science program trains students to be thoughtful practitioners who can communicate technical decisions to non-technical audiences, and that begins here.</p>
+              <p>Each week includes one 3-hour synchronous session over Zoom. We'll introduce key ideas, work through live coding demonstrations together, and launch the week's hands-on exercises. Between sessions, you'll continue at your own pace through video tutorials (via LinkedIn Learning), programming exercises, and weekly small-group study sessions (pods of 3–4 students).</p>
+              <p>Because this course covers significant ground in four weeks, consistent weekly effort matters more than any single big push. We've designed the workload to be manageable, but staying on top of each week's materials will make the next week much smoother.</p>
+              <div className="milestone-box" style={{ margin: "1.25rem 0" }}>
+                <div className="milestone-label">Pre-Bootcamp Preparation</div>
+                <div className="milestone-text">Students are asked to complete LinkedIn Learning pre-work modules beginning <strong>July 20, 2026</strong>, two weeks before the first synchronous session. This pre-work covers Python fundamentals and foundational math that we'll build on from Day 1. Plan for roughly 4–6 hours of self-paced video work.</div>
+              </div>
+            </section>
 
-          {/* Philosophy */}
-          <section className="section" id="philosophy">
-            <div className="section-header">
-              <span className="section-number">03</span>
-              <h2 className="section-title">Teaching Philosophy &amp; Modality</h2>
-            </div>
-            <p>The bootcamp focuses on <strong>conceptual fluency</strong>. Students are taught to understand and explain what their code is doing. In an era of AI-assisted coding, the ability to reason about the suitability of tools — not just using them — is the distinguishing skill. The Data Science program trains students to be applied AI practitioners who can articulate the conceptual reasons for applying AI in ways that allow them to communicate technical choices to non-technical stakeholders.</p>
-            <p>The course consists of one 3-hour synchronous meeting per week. Synchronous sessions introduce key concepts, work through live coding demonstrations, and launch the week's hands-on exercises. Because this four-week pilot compresses the standard six-week curriculum, each session covers more ground and the asynchronous workload is correspondingly higher.</p>
-            <p>Between sessions, students continue asynchronously through structured online activities including video tutorials (via LinkedIn Learning), programming exercises, and weekly small-group study sessions (pods of 3–4 students).</p>
-            <div className="milestone-box" style={{ margin: "1.25rem 0" }}>
-              <div className="milestone-label">Pre-Bootcamp Preparation</div>
-              <div className="milestone-text">Students are expected to complete LinkedIn Learning pre-work modules beginning <strong>July 20, 2026</strong> — two weeks before the first synchronous session. This pre-work covers Python fundamentals and foundational math concepts that will be assumed knowledge in Week 1.</div>
-            </div>
-          </section>
-
-          {/* Resources */}
-          <section className="section" id="resources">
-            <div className="section-header">
-              <span className="section-number">04</span>
-              <h2 className="section-title">Primary Resources</h2>
-            </div>
-            <div className="resources-grid">
-              {resources.map((r, i) => (
-                <div key={i} className="resource-card">
-                  <div className="resource-name">{r.name}</div>
-                  <div style={{ fontSize: "0.7rem", fontFamily: "'DM Mono', monospace", color: "var(--amber)", letterSpacing: "0.04em", marginBottom: "0.5rem" }}>{r.provider}</div>
-                  <div className="resource-desc">{r.desc}</div>
-                  <a href={r.url} className="resource-link" target="_blank" rel="noreferrer">↗ {r.url.replace("https://", "")}</a>
+            {/* 04 Assessment */}
+            <section className="section" id="assessment">
+              <div className="section-header">
+                <span className="section-number">04</span>
+                <h2 className="section-title">Milestones &amp; Assessment</h2>
+              </div>
+              <p>The bootcamp uses a <strong>milestone-based model</strong>. Each week you'll complete one personal coding milestone: a short Jupyter Notebook that applies the week's core skill to a dataset or problem you find interesting. There are no exams. Milestones receive brief written feedback from the instructor or TA.</p>
+              <div style={{ display: "grid", gap: "1rem", marginTop: "1.5rem" }}>
+                <div className="assessment-card">
+                  <div className="assessment-title">Weekly Milestones (Weeks 1–3)</div>
+                  <div className="assessment-desc">One milestone per week, submitted as a Jupyter Notebook. Each milestone applies the week's core skill to a real dataset of your choosing, with code comments and a brief written narrative of your findings. You choose the dataset. Pick something you're genuinely curious about.</div>
                 </div>
-              ))}
-            </div>
-          </section>
+                <div className="assessment-card" style={{ borderTop: "3px solid var(--peach)" }}>
+                  <div className="assessment-title">★ Capstone Milestone: Week 4</div>
+                  <div className="assessment-desc">A complete Jupyter Notebook demonstrating the full ML pipeline (data ingestion, cleaning, feature engineering, model training, and evaluation), presented live in a 5–7 minute synchronous presentation. Datasets should be drawn from domains you care about: communication, information science, public health, social science, or anything else that motivates you.</div>
+                </div>
+                <div className="assessment-card" style={{ borderTop: "3px solid var(--sage)" }}>
+                  <div className="assessment-title">Pilot Feedback Survey</div>
+                  <div className="assessment-desc">As part of the August 2026 pilot, students will complete a structured feedback survey at the close of Week 4 and are invited to participate in a mid-semester check-in. Your feedback directly shapes how future cohorts experience this course.</div>
+                </div>
+              </div>
+            </section>
 
-          {/* Assessment */}
-          <section className="section" id="assessment">
-            <div className="section-header">
-              <span className="section-number">05</span>
-              <h2 className="section-title">Milestones &amp; Assessment</h2>
-            </div>
-            <p>The bootcamp uses a <strong>milestone-based assessment model</strong>. Each week, every student completes one personal coding milestone: a short script or notebook that demonstrates the week's core skill applied to a dataset or problem of the student's choosing. Milestones are submitted as Jupyter Notebooks and reviewed by the instructor or TA with brief written feedback.</p>
-            <div style={{ display: "grid", gap: "1rem", marginTop: "1.5rem" }}>
-              <div className="assessment-card">
-                <div className="assessment-title">Weekly Milestones (Weeks 1–3)</div>
-                <div className="assessment-desc">One milestone per week submitted as a Jupyter Notebook. Each milestone applies the week's core skill to a real dataset of the student's choosing, with code comments and a brief written narrative of findings.</div>
+            {/* 05 Four-Week Overview */}
+            <section className="section" id="schedule">
+              <div className="section-header">
+                <span className="section-number">05</span>
+                <h2 className="section-title">Four-Week Overview</h2>
               </div>
-              <div className="assessment-card" style={{ borderTop: "3px solid var(--amber)" }}>
-                <div className="assessment-title">★ Capstone Milestone — Week 4</div>
-                <div className="assessment-desc">A complete Jupyter Notebook demonstrating the full ML pipeline (data ingestion, cleaning, feature engineering, model training, and evaluation) presented live in a 5–7 minute synchronous presentation. Datasets should be drawn from domains relevant to communication, information science, public health, or social science.</div>
-              </div>
-              <div className="assessment-card" style={{ borderTop: "3px solid #aaa" }}>
-                <div className="assessment-title">Pilot Feedback Survey</div>
-                <div className="assessment-desc">As part of the August 2026 pilot, students will complete a structured exit survey at the close of Week 4 and are invited to participate in a mid-semester check-in to assess how bootcamp preparation has supported their work in the fall core courses.</div>
-              </div>
-            </div>
-          </section>
-
-          {/* 4-Week Overview */}
-          <section className="section" id="schedule">
-            <div className="section-header">
-              <span className="section-number">06</span>
-              <h2 className="section-title">Four-Week Overview</h2>
-            </div>
-            <div style={{ overflowX: "auto" }}>
-              <table className="overview-table">
-                <thead>
-                  <tr>
-                    <th style={{ width: "80px" }}>Week</th>
-                    <th style={{ width: "200px" }}>Title</th>
-                    <th>Key Topics</th>
-                    <th style={{ width: "220px" }}>Milestone</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {overviewRows.map((row, i) => (
-                    <tr key={i} className={row.capstone ? "capstone-row" : ""}>
-                      <td><span className="week-num">{row.week}</span></td>
-                      <td style={{ fontWeight: 500, color: "#1a1a1a", fontSize: "0.87rem" }}>{row.title}</td>
-                      <td style={{ fontSize: "0.83rem" }}>{row.topics}</td>
-                      <td>
-                        {row.capstone && <div className="capstone-label">★ Capstone</div>}
-                        <span style={{ fontSize: "0.83rem" }}>{row.milestone.replace("★ FINAL: ", "")}</span>
-                      </td>
+              <div style={{ overflowX: "auto" }}>
+                <table className="overview-table">
+                  <thead>
+                    <tr>
+                      <th style={{ width: "80px" }}>Week</th>
+                      <th style={{ width: "210px" }}>Title</th>
+                      <th>Key Topics</th>
+                      <th style={{ width: "220px" }}>Milestone</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </section>
+                  </thead>
+                  <tbody>
+                    {overviewRows.map((row, i) => (
+                      <tr key={i} className={row.capstone ? "capstone-row" : ""}>
+                        <td><span className="week-num">{row.week}</span></td>
+                        <td style={{ fontWeight: 500, color: "#1a1a1a", fontSize: "0.87rem" }}>{row.title}</td>
+                        <td style={{ fontSize: "0.83rem" }}>{row.topics}</td>
+                        <td>
+                          {row.capstone && <div className="capstone-label">★ Capstone</div>}
+                          <span style={{ fontSize: "0.83rem" }}>{row.milestone.replace("★ FINAL: ", "")}</span>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <p style={{ marginTop: "1.25rem", fontSize: "0.87rem" }}>
+                For full session details, activities, and milestone prompts, see the <button onClick={() => setPage('sessions')} style={{ background: "none", border: "none", color: "var(--slate)", fontWeight: 600, cursor: "pointer", textDecoration: "underline", fontSize: "0.87rem", padding: 0 }}>Weekly Sessions</button> page.
+              </p>
+            </section>
 
-          {/* Week Sections */}
-          <section className="section" id="overview">
-            <div className="section-header">
-              <span className="section-number">07</span>
-              <h2 className="section-title">Weekly Session Details</h2>
-            </div>
-            {weekData.map(w => <WeekSection key={w.id} w={w} />)}
-          </section>
+          </main>
+        </div>
+      )}
 
-        </main>
-      </div>
+      {/* ══════════════════════════════════
+           PAGE: WEEKLY SESSIONS
+          ══════════════════════════════════ */}
+      {page === 'sessions' && (
+        <>
+          <div className="sessions-page-header">
+            <div className="sessions-page-header-inner">
+              <h2 className="sessions-page-title">Weekly Session Details</h2>
+              <p className="sessions-page-desc">Each week's synchronous session, asynchronous activities, and milestone prompt. Everything you need to stay on track and succeed.</p>
+            </div>
+          </div>
+
+          <div className="page-body">
+            <main className="content">
+              {weekData.map(w => <WeekSection key={w.id} w={w} />)}
+            </main>
+          </div>
+        </>
+      )}
 
       <footer className="page-footer">
-        <span style={{color:'var(--scarlet)'}}>Rutgers</span> University · School of Communication &amp; Information · Data Science Concentration ·{" "}
+        <span style={{color:'#F4A68A'}}>Rutgers</span> University · School of Communication &amp; Information · Data Science Concentration ·{" "}
         <a href="mailto:tawfiq.ammari@rutgers.edu">tawfiq.ammari@rutgers.edu</a> ·
-        Python &amp; Mathematics Bootcamp · August 3–28, 2026
+        Introductory Python &amp; Mathematics Bootcamp · August 3–28, 2026
       </footer>
     </div>
   );
