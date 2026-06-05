@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Week 1 · Python Foundations &amp; Data Libraries — Rutgers SC&amp;I Bootcamp</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
+<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<style>
+  :root{
+    --ink:#16223B; --ink2:#212E50; --scarlet:#CC0033; --steel:#5B6B8C;
+    --steel-lt:#93A2C4; --cloud:#EDF1F9; --code-bg:#1B2845; --code-txt:#E7EBF3;
+    --card-bd:#D4DCEC; --body:#46506A; --ink-txt:#1E2A45; --paper:#FFFFFF;
+    --head:'Fraunces', Georgia, 'Times New Roman', serif;
+    --mono:'JetBrains Mono', 'Consolas', monospace;
+    --sans:'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html,body{height:100%;}
+  body{
+    background:#0c1426;
+    font-family:var(--sans);
+    color:var(--ink-txt);
+    overflow:hidden;
+    display:flex;align-items:center;justify-content:center;
+  }
+  #root{width:100%;height:100%;}
+
+  .deck{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;
+    background:radial-gradient(120% 120% at 50% -10%, #1a2742 0%, #0c1426 60%, #070d1a 100%);}
+  .stage-wrap{position:relative;}
+  .stage{
+    width:1280px;height:720px;position:relative;overflow:hidden;
+    border-radius:10px;background:var(--paper);
+    box-shadow:0 40px 90px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.04);
+  }
+
+  /* slide base */
+  .slide{position:absolute;inset:0;padding:62px 70px;}
+  .slide.dark{background:var(--ink);color:#fff;}
+  .slide.light{background:var(--paper);}
+
+  .kicker{font-family:var(--mono);font-size:14px;font-weight:700;color:var(--scarlet);
+    letter-spacing:.28em;text-transform:uppercase;}
+  .s-title{font-family:var(--head);font-weight:600;color:var(--ink-txt);
+    font-size:40px;line-height:1.08;margin-top:14px;letter-spacing:-.01em;}
+  .slide.dark .s-title{color:#fff;}
+
+  /* code panel */
+  .code{background:var(--code-bg);border-radius:13px;padding:42px 26px 24px;position:relative;
+    box-shadow:0 14px 34px rgba(0,0,0,.30);font-family:var(--mono);}
+  .dots{position:absolute;top:16px;left:22px;display:flex;gap:8px;}
+  .dots i{width:11px;height:11px;border-radius:50%;display:block;}
+  .code pre{font-family:var(--mono);font-size:15px;line-height:1.55;color:var(--code-txt);
+    white-space:pre-wrap;}
+  .code .cm{color:var(--steel-lt);}
+
+  /* cards */
+  .card{background:var(--cloud);border:1px solid var(--card-bd);border-radius:12px;
+    box-shadow:0 10px 26px rgba(20,30,55,.10);position:relative;overflow:hidden;}
+  .card .edge{position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--scarlet);}
+  .card .top{position:absolute;left:0;right:0;top:0;height:5px;background:var(--scarlet);}
+
+  .num-chip{width:62px;height:62px;border-radius:50%;background:var(--scarlet);color:#fff;
+    display:flex;align-items:center;justify-content:center;font-family:var(--head);
+    font-weight:700;font-size:26px;}
+
+  .footnote{font-style:italic;color:var(--steel);font-size:16px;}
+
+  /* divider */
+  .divider .mod-label{font-family:var(--mono);font-size:15px;letter-spacing:.32em;
+    color:var(--steel-lt);text-transform:uppercase;font-weight:700;}
+  .divider .big-num{font-family:var(--head);font-weight:700;color:var(--scarlet);
+    font-size:200px;line-height:.8;}
+  .divider .d-title{font-family:var(--head);font-weight:700;color:#fff;font-size:50px;}
+  .divider .d-sub{color:var(--steel-lt);font-size:21px;margin-top:10px;}
+  .ic-ring{width:118px;height:118px;border-radius:50%;background:var(--ink2);
+    border:2px solid var(--scarlet);display:flex;align-items:center;justify-content:center;}
+
+  ul.blist{list-style:none;display:flex;flex-direction:column;gap:16px;}
+  ul.blist li{position:relative;padding-left:26px;font-size:18px;line-height:1.45;color:var(--ink-txt);}
+  ul.blist li::before{content:"";position:absolute;left:2px;top:9px;width:9px;height:9px;
+    border-radius:2px;background:var(--scarlet);transform:rotate(45deg);}
+  .slide.dark ul.blist li{color:#e7ebf3;}
+
+  /* chrome */
+  .chrome{position:fixed;left:0;right:0;bottom:0;height:54px;display:flex;align-items:center;
+    justify-content:center;gap:18px;z-index:50;}
+  .nav-btn{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);color:#cdd6ea;
+    width:38px;height:38px;border-radius:9px;cursor:pointer;font-size:17px;display:flex;
+    align-items:center;justify-content:center;transition:.18s;}
+  .nav-btn:hover{background:var(--scarlet);border-color:var(--scarlet);color:#fff;}
+  .dotrow{display:flex;gap:7px;align-items:center;}
+  .pdot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.22);cursor:pointer;
+    transition:.18s;border:none;padding:0;}
+  .pdot.on{background:var(--scarlet);transform:scale(1.35);}
+  .counter{position:fixed;top:18px;right:22px;font-family:var(--mono);font-size:13px;
+    color:rgba(255,255,255,.55);z-index:50;letter-spacing:.05em;}
+  .fsbtn{position:fixed;top:16px;left:22px;background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.16);color:#cdd6ea;border-radius:8px;cursor:pointer;
+    font-size:12px;font-family:var(--mono);padding:7px 12px;z-index:50;transition:.18s;letter-spacing:.04em;}
+  .fsbtn:hover{background:rgba(255,255,255,.16);color:#fff;}
+  .progress{position:fixed;top:0;left:0;height:3px;background:var(--scarlet);z-index:60;transition:width .3s ease;}
+
+  /* chart */
+  .chart{display:flex;align-items:flex-end;gap:26px;height:300px;padding:0 6px;}
+  .bar-col{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;}
+  .bar-val{font-family:var(--mono);font-size:14px;color:var(--ink-txt);font-weight:700;margin-bottom:8px;}
+  .bar{width:100%;max-width:78px;background:var(--scarlet);border-radius:5px 5px 0 0;
+    transition:height .6s cubic-bezier(.2,.7,.2,1);}
+  .bar-lab{font-size:14px;color:var(--body);margin-top:12px;}
+
+  .hint{position:fixed;bottom:62px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.4);
+    font-family:var(--mono);font-size:11px;letter-spacing:.08em;z-index:50;}
+  @media (max-width:520px){ .hint{display:none;} }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const {useState,useEffect,useRef,useCallback} = React;
+
+/* ---------- code panel with comment coloring ---------- */
+function Code({lines,fs=15,style}){
+  return (
+    <div className="code" style={style}>
+      <div className="dots"><i style={{background:'#FF5F56'}}/><i style={{background:'#FFBD2E'}}/><i style={{background:'#27C93F'}}/></div>
+      <pre style={{fontSize:fs}}>{lines.map((ln,i)=>{
+        const trimmed = ln.replace(/^\s+/,'');
+        if(trimmed.startsWith('#')) return <span key={i} className="cm">{ln+'\n'}</span>;
+        const idx = ln.indexOf('  #');
+        if(idx>=0) return <span key={i}>{ln.slice(0,idx)}<span className="cm">{ln.slice(idx)}</span>{'\n'}</span>;
+        return <span key={i}>{ln+'\n'}</span>;
+      })}</pre>
+    </div>
+  );
+}
+const Kicker = ({children}) => <div className="kicker">{children}</div>;
+const Title  = ({children,style}) => <h2 className="s-title" style={style}>{children}</h2>;
+
+/* ---------- divider icons (inline svg) ---------- */
+const ICON = {
+  python:(<svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3c-2.5 0-4 1-4 3v2h4M12 3c2.5 0 4 1 4 3v4c0 2-1.5 3-4 3H8c-2.5 0-4 1-4 3v2c0 2 1.5 3 4 3"/><path d="M12 21c2.5 0 4-1 4-3v-2h-4"/><circle cx="9.5" cy="6" r=".6" fill="#fff"/><circle cx="14.5" cy="18" r=".6" fill="#fff"/></svg>),
+  code:(<svg width="54" height="54" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><polyline points="8 7 3 12 8 17"/><polyline points="16 7 21 12 16 17"/></svg>),
+  layers:(<svg width="54" height="54" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 21 7 12 12 3 7 12 2"/><polyline points="3 12 12 17 21 12"/><polyline points="3 17 12 22 21 17"/></svg>),
+  sigma:(<svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M17 4H7l6 8-6 8h10"/></svg>),
+  table:(<svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="16" rx="1.5"/><line x1="3" y1="9.5" x2="21" y2="9.5"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9.5" y1="4" x2="9.5" y2="20"/></svg>),
+};
+
+/* ============ SLIDE RENDERERS ============ */
+const Slide = ({className,children}) => <div className={"slide "+className}>{children}</div>;
+
+function TitleSlide(){
+  return (
+    <Slide className="dark">
+      <Kicker>Rutgers SC&amp;I · Data Science Concentration</Kicker>
+      <h1 style={{fontFamily:'var(--head)',fontWeight:700,fontSize:64,lineHeight:1.02,
+        color:'#fff',marginTop:34,letterSpacing:'-.015em'}}>
+        Python &amp;<br/>Mathematics<br/>Bootcamp
+      </h1>
+      <div style={{marginTop:34,fontSize:25}}>
+        <span style={{color:'var(--scarlet)',fontWeight:700}}>WEEK 1&nbsp;&nbsp;</span>
+        <span style={{color:'#D7DEEC'}}>Python Foundations &amp; Data Libraries</span>
+      </div>
+      <div style={{marginTop:30,fontSize:17,lineHeight:1.55}}>
+        <div style={{fontWeight:700,color:'#fff'}}>August 3, 2026</div>
+        <div style={{color:'var(--steel-lt)'}}>Tawfiq Ammari · tawfiq.ammari@rutgers.edu</div>
+      </div>
+      <Code style={{position:'absolute',right:70,top:150,width:360}} fs={16} lines={[
+        '# your first session','import pandas as pd','','df = pd.read_csv(','    "survey.csv")','',
+        'df.head()','df.describe()','','# let\'s begin →'
+      ]}/>
+    </Slide>
+  );
+}
+
+function Roadmap(){
+  const mods=[
+    ['01','Python Basics','Types, variables, operators, control flow'],
+    ['02','Functions','Reusable, documented, return-driven code'],
+    ['03','Data Structures','Lists, tuples, dicts & sets — which when'],
+    ['04','NumPy','Arrays & fast vectorized math'],
+    ['05','Pandas','DataFrames: load, filter, group, interpret'],
+  ];
+  return (
+    <Slide className="light">
+      <Kicker>Week 1 Roadmap</Kicker>
+      <Title>Five building blocks, one session</Title>
+      <div style={{display:'grid',gridTemplateColumns:'repeat(5,1fr)',gap:14,marginTop:34}}>
+        {mods.map((m,i)=>(
+          <div key={i} className="card" style={{padding:'26px 18px',height:330}}>
+            <div className="num-chip">{m[0]}</div>
+            <div style={{fontFamily:'var(--head)',fontWeight:600,fontSize:21,color:'var(--ink-txt)',marginTop:22,lineHeight:1.15}}>{m[1]}</div>
+            <div style={{fontSize:15,color:'var(--body)',marginTop:14,lineHeight:1.4}}>{m[2]}</div>
+          </div>
+        ))}
+      </div>
+      <div className="footnote" style={{marginTop:30}}>Each block has a worked-examples notebook, a hands-on exercise notebook, and an answer key.</div>
+    </Slide>
+  );
+}
+
+function Philosophy(){
+  const pills=[
+    ['Understand','Know what each line of your code actually does.'],
+    ['Explain','Describe your tools and choices to non-technical audiences.'],
+    ['Reason','Judge when a tool — or an AI suggestion — actually fits.'],
+  ];
+  return (
+    <Slide className="light">
+      <Kicker>Teaching Philosophy</Kicker>
+      <Title>Conceptual fluency over memorization</Title>
+      <div style={{display:'flex',gap:48,marginTop:40}}>
+        <p style={{flex:'0 0 540px',fontSize:21,lineHeight:1.5,color:'var(--body)'}}>
+          <strong style={{color:'var(--ink-txt)'}}>This bootcamp does not aim to make you a software engineer. </strong>
+          The goal is to understand the tools you use and explain the models you rely on — the distinguishing skill in an era of AI-assisted coding.
+        </p>
+        <div style={{flex:1,display:'flex',flexDirection:'column',gap:18}}>
+          {pills.map((p,i)=>(
+            <div key={i} className="card" style={{padding:'18px 22px'}}>
+              <div className="edge"/>
+              <div style={{fontFamily:'var(--head)',fontWeight:600,fontSize:20,color:'var(--ink-txt)'}}>{p[0]}</div>
+              <div style={{fontSize:15.5,color:'var(--body)',marginTop:6,lineHeight:1.3}}>{p[1]}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </Slide>
+  );
+}
+
+function Environment(){
+  const envs=[
+    ['Jupyter Notebook','Runs on your machine. Cells mix code, output, and notes — ideal for analysis you save and share.',['Install via Anaconda','Files end in .ipynb','Run a cell: Shift + Enter']],
+    ['Google Colab','Jupyter in the browser — nothing to install. Free, and great for following along live.',['colab.research.google.com','Runs on Google\'s servers','Share like a Google Doc']],
+  ];
+  return (
+    <Slide className="light">
+      <Kicker>Your Toolkit</Kicker>
+      <Title>Where you'll write code</Title>
+      <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:28,marginTop:38}}>
+        {envs.map((e,i)=>(
+          <div key={i} className="card" style={{padding:'30px 30px 26px'}}>
+            <div className="top"/>
+            <div style={{fontFamily:'var(--head)',fontWeight:600,fontSize:24,color:'var(--ink-txt)'}}>{e[0]}</div>
+            <div style={{fontSize:16,color:'var(--body)',marginTop:12,lineHeight:1.45}}>{e[1]}</div>
+            <ul className="blist" style={{marginTop:18,gap:10}}>
+              {e[2].map((t,j)=><li key={j} style={{fontSize:15.5}}>{t}</li>)}
+            </ul>
+          </div>
+        ))}
+      </div>
+      <div className="footnote" style={{marginTop:28}}>New to coding? You're in exactly the right place — we go step by step, together.</div>
+    </Slide>
+  );
+}
+
+function Divider({num,title,sub,icon}){
+  return (
+    <Slide className="dark divider">
+      <div style={{position:'absolute',top:200,left:70}}>
+        <div className="mod-label">Module</div>
+        <div style={{display:'flex',alignItems:'flex-start',gap:36,marginTop:10}}>
+          <div className="big-num">{num}</div>
+          <div style={{marginTop:40}}>
+            <div className="d-title">{title}</div>
+            <div className="d-sub">{sub}</div>
+          </div>
+        </div>
+      </div>
+      <div className="ic-ring" style={{position:'absolute',right:90,top:300}}>{icon}</div>
+    </Slide>
+  );
+}
+
+function ContentCode({kicker,title,bullets,code,codeFs=15,extra,colSplit='1fr 1fr'}){
+  return (
+    <Slide className="light">
+      <Kicker>{kicker}</Kicker>
+      <Title>{title}</Title>
+      <div style={{display:'grid',gridTemplateColumns:colSplit,gap:40,marginTop:40,alignItems:'start'}}>
+        <ul className="blist">{bullets.map((b,i)=><li key={i}>{b}</li>)}</ul>
+        <Code lines={code} fs={codeFs}/>
+        {extra}
+      </div>
+    </Slide>
+  );
+}
+
+function DataStructures(){
+  const cells=[
+    ['list  [ ]','Ordered & changeable','scores = [88, 72, 95]','Your default collection'],
+    ['tuple  ( )','Ordered but fixed','rng = (18.5, 24.9)','Values that shouldn\'t change'],
+    ['dict  { : }','Labeled key → value','r = {\'age\': 34}','One record / lookups'],
+    ['set  { }','Unique, unordered','set(regions)','Distinct values, fast \'in\''],
+  ];
+  return (
+    <Slide className="light">
+      <Kicker>Module 03 · Data Structures</Kicker>
+      <Title>Which container, and when</Title>
+      <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:18,marginTop:36}}>
+        {cells.map((c,i)=>(
+          <div key={i} className="card" style={{padding:'18px 24px',minHeight:130}}>
+            <div className="edge"/>
+            <div style={{fontFamily:'var(--mono)',fontWeight:700,fontSize:18,color:'var(--ink-txt)'}}>{c[0]}</div>
+            <div style={{fontSize:14.5,fontWeight:700,color:'var(--scarlet)',marginTop:8}}>{c[1]}</div>
+            <div style={{fontFamily:'var(--mono)',fontSize:14,color:'var(--steel)',marginTop:6}}>{c[2]}</div>
+            <div style={{fontSize:14.5,color:'var(--body)',marginTop:6}}>{c[3]}</div>
+          </div>
+        ))}
+      </div>
+    </Slide>
+  );
+}
+
+function NumpySlide(){
+  return (
+    <Slide className="light">
+      <Kicker>Module 04 · NumPy</Kicker>
+      <Title>One operation, the whole array at once</Title>
+      <div style={{display:'grid',gridTemplateColumns:'1.15fr .95fr .8fr',gap:30,marginTop:40,alignItems:'start'}}>
+        <ul className="blist">
+          <li>An array holds many numbers of one type</li>
+          <li>Vectorized math applies to every element — no loop</li>
+          <li>Boolean masks filter by condition: arr[arr &gt; 50]</li>
+          <li>Aggregations in one call: mean, std, sum, min, max</li>
+        </ul>
+        <Code fs={15} lines={['import numpy as np','inc = np.array(','  [42,58,31,77,64])','','inc * 1000   # all','inc[inc > 50]','inc.mean()','inc.std()']}/>
+        <div style={{background:'var(--ink)',borderRadius:14,padding:'40px 22px',textAlign:'center',
+          boxShadow:'0 14px 34px rgba(0,0,0,.30)'}}>
+          <div style={{fontFamily:'var(--head)',fontWeight:700,fontSize:54,color:'var(--scarlet)'}}>~50×+</div>
+          <div style={{fontSize:16,color:'#D7DEEC',marginTop:14,lineHeight:1.35}}>faster than a Python loop on a million numbers</div>
+        </div>
+      </div>
+    </Slide>
+  );
+}
+
+function PandasSlide(){
+  const steps=[
+    ['read_csv','Load a table into a DataFrame'],
+    ['inspect','head / info / describe'],
+    ['filter','Keep rows that match a condition'],
+    ['groupby','Summarize by category'],
+    ['interpret','State findings — and their limits'],
+  ];
+  const data=[['Midwest',3.14],['Northeast',3.13],['South',3.24],['West',3.30]];
+  const min=3.0,max=3.4;
+  return (
+    <Slide className="light">
+      <Kicker>Module 05 · Pandas</Kicker>
+      <Title>The workflow you'll use every week</Title>
+      <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:46,marginTop:36,alignItems:'start'}}>
+        <div style={{display:'flex',flexDirection:'column',gap:16}}>
+          {steps.map((st,i)=>(
+            <div key={i} style={{display:'flex',alignItems:'center',gap:18}}>
+              <div style={{width:44,height:44,borderRadius:'50%',background:'var(--scarlet)',color:'#fff',
+                display:'flex',alignItems:'center',justifyContent:'center',fontFamily:'var(--head)',fontWeight:700,fontSize:18,flexShrink:0}}>{i+1}</div>
+              <div style={{fontSize:16}}>
+                <span style={{fontFamily:'var(--mono)',fontWeight:700,color:'var(--ink-txt)'}}>{st[0]}</span>
+                <span style={{color:'var(--body)'}}>&nbsp;— {st[1]}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div>
+          <div style={{fontSize:14.5,fontWeight:700,color:'var(--steel)',marginBottom:14}}>Avg. self-rated health by region (sample data)</div>
+          <div className="chart">
+            {data.map(([lab,val],i)=>(
+              <div className="bar-col" key={i}>
+                <div className="bar-val">{val.toFixed(2)}</div>
+                <div className="bar" style={{height:((val-min)/(max-min)*100)+'%'}}/>
+                <div className="bar-lab">{lab}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </Slide>
+  );
+}
+
+function Milestone(){
+  const flow=[['Examples','Read & run the worked code'],['Questions','Try the exercises yourself'],['Answers','Check & compare solutions']];
+  return (
+    <Slide className="light">
+      <Kicker>This Week</Kicker>
+      <Title>Your Week 1 milestone</Title>
+      <div style={{display:'grid',gridTemplateColumns:'1.05fr .95fr',gap:40,marginTop:38,alignItems:'start'}}>
+        <div className="card" style={{padding:'30px 32px',minHeight:300}}>
+          <div className="edge"/>
+          <div style={{fontFamily:'var(--head)',fontWeight:600,fontSize:24,color:'var(--ink-txt)'}}>Pandas mini-analysis</div>
+          <p style={{fontSize:17,color:'var(--body)',marginTop:18,lineHeight:1.5}}>
+            Write a Jupyter Notebook that loads a real dataset of your choice, performs filtering or aggregation with Pandas, and answers a specific research question.
+          </p>
+          <p style={{fontSize:17,color:'var(--body)',marginTop:14,lineHeight:1.5}}>
+            Comment each step and add a short written narrative of your findings.
+          </p>
+        </div>
+        <div>
+          <div style={{fontSize:14.5,fontWeight:700,color:'var(--steel)',marginBottom:16}}>How to use each module's notebooks</div>
+          <div style={{display:'flex',flexDirection:'column',gap:14}}>
+            {flow.map((f,i)=>(
+              <div key={i} className="card" style={{background:'var(--paper)',padding:'16px 20px',display:'flex',alignItems:'center',gap:16}}>
+                <div style={{fontFamily:'var(--head)',fontWeight:700,fontSize:22,color:'var(--scarlet)'}}>{i+1}</div>
+                <div style={{fontSize:15.5}}>
+                  <span style={{fontWeight:700,color:'var(--ink-txt)'}}>{f[0]}&nbsp;&nbsp;</span>
+                  <span style={{color:'var(--body)'}}>{f[1]}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </Slide>
+  );
+}
+
+function Closing(){
+  const core=[
+    ['MI 552','Computational Reasoning','Python & logic from day one'],
+    ['MI 547','Data Curation','Pandas pipelines & wrangling'],
+    ['MI 564','Machine Learning','Arrays feed scikit-learn models'],
+    ['NEW','Neural Networks','Calculus intuition → backprop'],
+  ];
+  return (
+    <Slide className="dark">
+      <Kicker>Where This Leads</Kicker>
+      <h2 style={{fontFamily:'var(--head)',fontWeight:700,fontSize:42,color:'#fff',marginTop:14}}>Week 1 is the on-ramp to the core</h2>
+      <div style={{display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:22,marginTop:44}}>
+        {core.map((c,i)=>(
+          <div key={i} style={{background:'var(--ink2)',border:'1px solid #33406A',borderRadius:13,
+            padding:'26px 22px',position:'relative',overflow:'hidden',minHeight:210}}>
+            <div className="top"/>
+            <div style={{fontFamily:'var(--head)',fontWeight:700,fontSize:26,color:'var(--scarlet)',marginTop:6}}>{c[0]}</div>
+            <div style={{fontSize:17,fontWeight:700,color:'#fff',marginTop:14,lineHeight:1.2}}>{c[1]}</div>
+            <div style={{fontSize:14,color:'var(--steel-lt)',marginTop:14,lineHeight:1.35}}>{c[2]}</div>
+          </div>
+        ))}
+      </div>
+      <div style={{marginTop:40,fontSize:21}}>
+        <span style={{color:'var(--scarlet)',fontWeight:700}}>Next week → </span>
+        <span style={{color:'#D7DEEC'}}>Data Wrangling, Visualization &amp; Statistics</span>
+      </div>
+      <div style={{position:'absolute',left:70,bottom:50,fontFamily:'var(--mono)',fontSize:13,color:'var(--steel)'}}>
+        Tawfiq Ammari · tawfiq.ammari@rutgers.edu · Rutgers SC&amp;I Data Science Concentration
+      </div>
+    </Slide>
+  );
+}
+
+/* ---------- slide list ---------- */
+const SLIDES = [
+  <TitleSlide/>,
+  <Roadmap/>,
+  <Philosophy/>,
+  <Environment/>,
+  <Divider num="01" title="Python Basics" sub="Types, variables, operators & control flow" icon={ICON.python}/>,
+  <ContentCode kicker="Module 01 · Python Basics" title="Values have types; operators act on them"
+    bullets={['Variables name values — Python infers the type for you','Four everyday types: int, float, str, bool','Arithmetic ( + − * / // % ** ), comparison ( == < > ), logic ( and / or / not )','f-strings drop variables straight into readable text']}
+    code={['age = 34            # int','income_k = 58.5     # float','region = "Northeast"  # str','is_student = True   # bool','','print(income_k > 50)        # True','print(income_k > 50 and','      is_student)          # True','','msg = f"{region}: ${income_k}k"','print(msg)  # Northeast: $58.5k']}/>,
+  <ContentCode kicker="Module 01 · Python Basics" title="Control flow: decisions and repetition"
+    bullets={['if / elif / else runs different code per condition','Indentation (4 spaces) defines what\'s inside a block','for loops repeat once per item; range() counts for you','while loops repeat until a condition turns False']}
+    code={['if income_k < 40:','    bracket = "lower"','elif income_k < 80:','    bracket = "middle"','else:','    bracket = "upper"','','seniors = 0','for a in ages:','    if a >= 65:','        seniors += 1']}/>,
+  <Divider num="02" title="Functions" sub="Reusable, documented, return-driven code" icon={ICON.code}/>,
+  <ContentCode kicker="Module 02 · Functions" title="Write logic once, reuse it by name"
+    bullets={['def name(parameters): defines a function; return sends a value back','Prefer return over print — returned values can be reused','Default & keyword arguments make calls flexible and self-documenting','A docstring under def explains what the function does']}
+    code={['def age_group(age):','    """Life-stage label for an age."""','    if age < 25:','        return "youth"','    elif age < 65:','        return "working-age"','    return "senior"','','print(age_group(19))   # youth','print(age_group(70))   # senior']}/>,
+  <Divider num="03" title="Data Structures" sub="Lists, tuples, dictionaries & sets" icon={ICON.layers}/>,
+  <DataStructures/>,
+  <Divider num="04" title="NumPy" sub="Arrays and fast vectorized math" icon={ICON.sigma}/>,
+  <NumpySlide/>,
+  <Divider num="05" title="Pandas" sub="DataFrames: the daily data workflow" icon={ICON.table}/>,
+  <PandasSlide/>,
+  <Milestone/>,
+  <Closing/>,
+];
+
+/* ============ DECK SHELL ============ */
+function Deck(){
+  const [i,setI]=useState(0);
+  const [scale,setScale]=useState(1);
+  const wrapRef=useRef(null);
+
+  const go=useCallback((n)=>setI(p=>Math.max(0,Math.min(SLIDES.length-1,n))),[]);
+
+  useEffect(()=>{
+    const onKey=(e)=>{
+      if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' '){e.preventDefault();go(iRef.current+1);}
+      else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();go(iRef.current-1);}
+      else if(e.key==='Home'){go(0);} else if(e.key==='End'){go(SLIDES.length-1);}
+      else if(e.key==='f'||e.key==='F'){toggleFs();}
+    };
+    window.addEventListener('keydown',onKey);
+    return ()=>window.removeEventListener('keydown',onKey);
+  },[go]);
+
+  const iRef=useRef(i); useEffect(()=>{iRef.current=i;},[i]);
+
+  useEffect(()=>{
+    const fit=()=>{
+      const pad=64;
+      const sw=(window.innerWidth-pad)/1280;
+      const sh=(window.innerHeight-pad-40)/720;
+      setScale(Math.min(sw,sh,1.25));
+    };
+    fit(); window.addEventListener('resize',fit);
+    return ()=>window.removeEventListener('resize',fit);
+  },[]);
+
+  const toggleFs=()=>{
+    if(!document.fullscreenElement) document.documentElement.requestFullscreen?.();
+    else document.exitFullscreen?.();
+  };
+
+  return (
+    <div className="deck">
+      <div className="progress" style={{width:((i+1)/SLIDES.length*100)+'%'}}/>
+      <button className="fsbtn" onClick={toggleFs}>⛶ Fullscreen (F)</button>
+      <div className="counter">{String(i+1).padStart(2,'0')} / {String(SLIDES.length).padStart(2,'0')}</div>
+
+      <div className="stage-wrap" ref={wrapRef} style={{transform:`scale(${scale})`}}>
+        <div className="stage">{SLIDES[i]}</div>
+      </div>
+
+      <div className="hint">← →  navigate   ·   F  fullscreen</div>
+
+      <div className="chrome">
+        <button className="nav-btn" onClick={()=>go(i-1)} aria-label="Previous">‹</button>
+        <div className="dotrow">
+          {SLIDES.map((_,k)=>(
+            <button key={k} className={"pdot"+(k===i?' on':'')} onClick={()=>go(k)} aria-label={"Slide "+(k+1)}/>
+          ))}
+        </div>
+        <button className="nav-btn" onClick={()=>go(i+1)} aria-label="Next">›</button>
+      </div>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<Deck/>);
+</script>
+</body>
+</html>
