@@ -202,40 +202,6 @@
     padding: 3rem 2rem;
   }
 
-  /* ── Sidebar ── */
-  .sidebar { position: sticky; top: 72px; }
-  .sidebar-section { margin-bottom: 2rem; }
-  .sidebar-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    margin-bottom: 0.75rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid var(--border);
-  }
-  .sidebar-link {
-    display: block;
-    font-size: 0.83rem;
-    color: var(--text-mid);
-    text-decoration: none;
-    padding: 0.3rem 0.6rem;
-    border-radius: 4px;
-    border-left: 2px solid transparent;
-    transition: all 0.15s;
-    margin-bottom: 0.1rem;
-    background: none;
-    border-right: none;
-    border-top: none;
-    border-bottom-color: transparent;
-    cursor: pointer;
-    width: 100%;
-    text-align: left;
-  }
-  .sidebar-link:hover { background: rgba(91,111,160,0.07); border-left-color: var(--peach); color: var(--slate); }
-  .sidebar-link.week-link { font-family: 'DM Mono', monospace; font-size: 0.78rem; }
-
   /* ── Content ── */
   .content { min-width: 0; }
   .section { margin-bottom: 3.5rem; scroll-margin-top: 80px; }
@@ -388,6 +354,144 @@
   .sessions-page-title { font-family: 'Playfair Display', serif; font-size: 1.75rem; color: var(--slate); margin-bottom: 0.5rem; }
   .sessions-page-desc { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; max-width: 580px; }
 
+  /* ── FAQ page ── */
+  .faq-page-header {
+    background: linear-gradient(135deg, var(--sage-pale) 0%, var(--lavender-pale) 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 2.25rem 2rem 2rem;
+  }
+  .faq-page-header-inner { max-width: 1100px; margin: 0 auto; }
+  .faq-page-title { font-family: 'Playfair Display', serif; font-size: 1.75rem; color: var(--slate); margin-bottom: 0.5rem; }
+  .faq-page-desc { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; max-width: 580px; }
+
+  .faq-category {
+    margin-bottom: 2.75rem;
+  }
+  .faq-category-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--peach);
+    margin-bottom: 1rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .faq-category-label::before {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--peach);
+    flex-shrink: 0;
+  }
+
+  .faq-item {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 0.75rem;
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+  }
+  .faq-item:hover { box-shadow: 0 2px 12px rgba(92,111,160,0.1); }
+
+  .faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 1.1rem 1.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    cursor: pointer;
+    text-align: left;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--slate);
+    line-height: 1.5;
+    transition: background 0.15s;
+  }
+  .faq-question:hover { background: var(--lavender-pale); }
+  .faq-question.open { background: var(--lavender-pale); border-bottom: 1px solid var(--border); }
+
+  .faq-chevron {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    color: var(--peach);
+    transition: transform 0.2s;
+  }
+  .faq-chevron.open { transform: rotate(180deg); }
+
+  .faq-answer {
+    padding: 1.1rem 1.4rem;
+    font-size: 0.87rem;
+    color: var(--text-mid);
+    line-height: 1.8;
+    border-top: 1px solid var(--border);
+    background: white;
+  }
+  .faq-answer p { margin-bottom: 0.75rem; }
+  .faq-answer p:last-child { margin-bottom: 0; }
+  .faq-answer ul {
+    margin: 0.5rem 0 0.75rem 0;
+    padding-left: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  .faq-answer ul li {
+    display: flex;
+    gap: 0.6rem;
+    align-items: flex-start;
+    font-size: 0.87rem;
+    color: var(--text-mid);
+  }
+  .faq-answer ul li::before {
+    content: '→';
+    color: var(--peach);
+    font-family: 'DM Mono', monospace;
+    flex-shrink: 0;
+    font-size: 0.78rem;
+    margin-top: 0.22rem;
+  }
+  .faq-answer strong { color: var(--slate); font-weight: 600; }
+  .faq-answer .faq-note {
+    background: var(--peach-pale);
+    border-left: 3px solid var(--peach);
+    border-radius: 0 4px 4px 0;
+    padding: 0.75rem 1rem;
+    font-size: 0.83rem;
+    margin-top: 0.75rem;
+    color: var(--text-mid);
+  }
+  .faq-tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+  }
+  .faq-tool-chip {
+    background: var(--lavender-pale);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.5rem 0.75rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--slate);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
   /* ── Footer ── */
   .page-footer {
     background: var(--slate);
@@ -403,7 +507,6 @@
 
   @media (max-width: 760px) {
     .page-body { grid-template-columns: 1fr; }
-    .sidebar { position: static; }
     .hero-inner { grid-template-columns: 1fr; }
     .hero-meta { text-align: left; }
     .info-strip-inner { gap: 1.25rem; }
@@ -520,6 +623,135 @@ const overviewRows = [
   { week: "Week 4 ★", title: "Capstone: Applied ML Workflow", topics: "Full pipeline: load → clean → feature engineer → train → evaluate → present", milestone: "★ FINAL: Full ML pipeline notebook + live presentation", capstone: true },
 ];
 
+const faqData = [
+  {
+    category: "Format and Logistics",
+    questions: [
+      {
+        q: "What is the format of the bootcamp?",
+        a: (
+          <div>
+            <p>The bootcamp combines synchronous and asynchronous learning. Each week includes one live 3-hour session over Zoom, which will also be recorded. The remaining work — readings, exercises, and preparation — is asynchronous and organized through Canvas.</p>
+            <p>We use several tools to support your learning:</p>
+            <div className="faq-tools-grid">
+              {[["💻","Zoom","live sessions & recordings"],["📋","Canvas","course management"],["📓","Google Colab","notebooks & data"],["🎓","LinkedIn Learning","async prep work"],["💬","Ed Discussion","Q&A forum"]].map(([icon,name,desc])=>(
+                <div className="faq-tool-chip" key={name}><span>{icon}</span><span><strong>{name}</strong><br/><span style={{fontSize:'0.68rem',opacity:0.75}}>{desc}</span></span></div>
+              ))}
+            </div>
+            <p style={{marginTop:'0.75rem'}}>Links to all of these will be shared before July 20. If you need to meet with the instructor one-on-one, just reach out to schedule a time. Office hours are available throughout the week.</p>
+          </div>
+        ),
+      },
+      {
+        q: "What is the weekly workload?",
+        a: <p>In addition to the weekly 3-hour live session, expect approximately 7 to 9 hours of asynchronous work per week depending on your background and pace. This includes preparatory LinkedIn Learning modules, readings, and hands-on exercises.</p>,
+      },
+      {
+        q: "Will sessions be recorded if I cannot attend live?",
+        a: <p>Yes. All synchronous Zoom sessions will be recorded and made available through Canvas, so you will not miss anything if you have a scheduling conflict.</p>,
+      },
+    ],
+  },
+  {
+    category: "Eligibility and Enrollment",
+    questions: [
+      {
+        q: "Can I participate if I am not enrolled in summer classes (e.g., I am registered for Fall 2026 only)?",
+        a: (
+          <div>
+            <div className="faq-note">This is an open question we are still working through. Please reach out directly to confirm your eligibility before July 20.</div>
+          </div>
+        ),
+      },
+      {
+        q: "Can current students or recent graduates participate?",
+        a: <p>Yes. The bootcamp is open to current students and recent graduates. This is a community learning experience, and everyone benefits from having a range of backgrounds and experience levels in the room.</p>,
+      },
+    ],
+  },
+  {
+    category: "Prerequisites and Academic Credit",
+    questions: [
+      {
+        q: "What technical or computer skills do I need?",
+        a: <p>None at all. The bootcamp is designed from the ground up to introduce you to these skills. Whether you have never written a line of code or you already have some experience, you will find a place here. We will walk through everything together.</p>,
+      },
+      {
+        q: "Is the bootcamp offered for credit?",
+        a: (
+          <div>
+            <p>The Summer 2026 bootcamp is a non-credit experience. Participants will receive a certificate of completion.</p>
+            <p>A credit-bearing version is something we may explore in a future configuration. If this matters to you, please let us know — student feedback shapes how the program evolves.</p>
+          </div>
+        ),
+      },
+      {
+        q: "Could this become a for-credit semester course in the future?",
+        a: (
+          <div>
+            <p>It is possible. We are treating the August 2026 cohort as a pilot, and what we learn will directly inform future decisions about format, credit, and scheduling. A semester-length for-credit version is among the options being considered for 2027 and beyond. This is why your feedback matters, especially if you take the class.</p>
+          </div>
+        ),
+      },
+    ],
+  },
+  {
+    category: "Content and Projects",
+    questions: [
+      {
+        q: "Will the bootcamp cover AI tools used in industry?",
+        a: (
+          <div>
+            <p>Yes. The focus is on the tools most widely adopted in professional data science and AI workflows — specifically the Python packages you are most likely to encounter on the job. The goal is practical fluency, not abstract theory.</p>
+            <p>These tools are actively reshaping work across every concentration in SC&I. A few examples of how applied AI connects to different fields of study:</p>
+            <ul>
+              <li><strong>Human-Computer Interaction (HCI):</strong> designing and evaluating AI-powered interfaces, chatbots, and accessibility tools using user-centered methods and usability testing.</li>
+              <li><strong>Archives and Preservation:</strong> using natural language processing to transcribe handwritten records, classify historical documents, and make archival collections searchable at scale.</li>
+              <li><strong>Library and Information Science:</strong> automating metadata creation, analyzing collection gaps, and building AI-assisted discovery tools for patrons and researchers.</li>
+              <li><strong>Technology and Information Management:</strong> applying data pipelines and machine learning to organizational decision-making, workflow automation, and information governance.</li>
+              <li><strong>Health Information:</strong> working with clinical records and public health datasets to support evidence-based decisions, patient outcomes research, and population health analysis.</li>
+              <li><strong>Data Science:</strong> building end-to-end ML pipelines, running regression and classification models, and communicating findings to non-technical audiences.</li>
+            </ul>
+            <p>Think of this bootcamp as an on-ramp, not the whole road. You will come away with a working understanding of these tools, and the courses that follow will give you the depth and practice to use them with real confidence.</p>
+          </div>
+        ),
+      },
+      {
+        q: "Can my capstone project connect to my own research interests?",
+        a: <p>That would be preferred, yes. We encourage you to bring your own domain — whether that is media, public health, libraries, economics, or something else entirely — into your project work. The skills you learn are most meaningful when applied to questions you actually care about.</p>,
+      },
+    ],
+  },
+  {
+    category: "Concentration-Specific Questions",
+    questions: [
+      {
+        q: "How is this relevant to Library Science and Archives work?",
+        a: (
+          <div>
+            <p>The skills introduced in this bootcamp are central to understanding and engaging with data science and AI, and those fields are reshaping library and archival work in concrete ways. A few examples of how these skills translate directly to the LIS and Archives concentrations:</p>
+            <ul>
+              <li><strong>Metadata and cataloging:</strong> Python is increasingly used to automate the creation, cleaning, and standardization of metadata at scale — work that would take weeks by hand.</li>
+              <li><strong>Digital preservation:</strong> Understanding data structures helps archivists assess file format migration, identify corruption, and design more robust long-term storage workflows.</li>
+              <li><strong>Collection analysis:</strong> Data science tools allow libraries and archives to analyze collection gaps, usage patterns, and community needs in ways traditional methods cannot match.</li>
+              <li><strong>Text and document processing:</strong> Natural language processing tools, which this bootcamp introduces, are actively used to transcribe handwritten records, classify archival documents, and make historical collections searchable.</li>
+            </ul>
+            <p>How you apply these skills will depend on your own background and interests. The bootcamp gives you the foundation; your concentration gives you the context. The same toolkit connects meaningfully to HCI, TIM, Health Information, and every other concentration in SC&I.</p>
+          </div>
+        ),
+      },
+      {
+        q: "Will there be a cybersecurity bootcamp or similar offerings in the future?",
+        a: (
+          <div>
+            <p>That is not something currently planned, but it is a great idea worth raising. We would love to know what topics students would find most valuable in future bootcamps. If you have a strong interest in a particular area — cybersecurity, data visualization, NLP, or something else entirely — please share that with us. Student interest directly informs what we plan next.</p>
+          </div>
+        ),
+      },
+    ],
+  },
+];
+
 function scrollTo(id) {
   document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 }
@@ -577,6 +809,48 @@ function WeekSection({ w }) {
   );
 }
 
+function FaqItem({ q, a }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="faq-item">
+      <button className={`faq-question ${open ? 'open' : ''}`} onClick={() => setOpen(!open)}>
+        <span>{q}</span>
+        <svg className={`faq-chevron ${open ? 'open' : ''}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <polyline points="6 9 12 15 18 9"/>
+        </svg>
+      </button>
+      {open && (
+        <div className="faq-answer">{a}</div>
+      )}
+    </div>
+  );
+}
+
+function FaqPage() {
+  return (
+    <>
+      <div className="faq-page-header">
+        <div className="faq-page-header-inner">
+          <h2 className="faq-page-title">Frequently Asked Questions</h2>
+          <p className="faq-page-desc">Everything you need to know before the bootcamp begins. Click any question to expand the answer.</p>
+        </div>
+      </div>
+      <div className="page-body">
+        <main className="content">
+          {faqData.map((cat) => (
+            <div className="faq-category" key={cat.category}>
+              <div className="faq-category-label">{cat.category}</div>
+              {cat.questions.map((item, i) => (
+                <FaqItem key={i} q={item.q} a={item.a} />
+              ))}
+            </div>
+          ))}
+        </main>
+      </div>
+    </>
+  );
+}
+
 function App() {
   const [page, setPage] = useState('home');
 
@@ -597,6 +871,7 @@ function App() {
             ) : null}
             <button className={`page-tab ${page === 'home' ? 'active' : ''}`} onClick={() => setPage('home')}>🏠 Home</button>
             <button className={`page-tab ${page === 'sessions' ? 'active' : ''}`} onClick={() => setPage('sessions')}>Weekly Sessions</button>
+            <button className={`page-tab ${page === 'faq' ? 'active' : ''}`} onClick={() => setPage('faq')}>FAQ</button>
             <a href="http://sites.comminfo.rutgers.edu/tammari/wp-content/uploads/sites/14/2026/05/bootcamp_4week_august2026_syllabus_april_28.pdf" target="_blank" rel="noreferrer" className="page-tab" style={{ textDecoration: "none" }}>Syllabus ↗</a>
           </nav>
         </div>
@@ -638,7 +913,7 @@ function App() {
             ["Format", "1 × 3-hr session/week + self-paced work"],
             ["Modality", "Online via Zoom + Canvas"],
             ["Audience", "Incoming & current SC&I graduate students"],
-            ["Weekly Commitment", "~8–12 hours"],
+            ["Weekly Commitment", "~10–12 hours"],
             ["Assessment", "Weekly milestones + capstone project"],
           ].map(([label, val]) => (
             <div className="info-item" key={label}>
@@ -649,14 +924,11 @@ function App() {
         </div>
       </div>
 
-      {/* ══════════════════════════════════
-           PAGE: SYLLABUS
-          ══════════════════════════════════ */}
+      {/* ══ PAGE: HOME ══ */}
       {page === 'home' && (
         <div className="page-body">
           <main className="content">
 
-            {/* 01 Course Description */}
             <section className="section" id="description">
               <div className="section-header">
                 <span className="section-number">01</span>
@@ -668,7 +940,6 @@ function App() {
               <p>This course was built for students coming from communications, journalism, economics, public health, and related fields, many of whom have little or no prior programming or math background. <strong>If you've never written a line of code before, you're in exactly the right place.</strong></p>
             </section>
 
-            {/* 02 Learning Objectives */}
             <section className="section" id="objectives">
               <div className="section-header">
                 <span className="section-number">02</span>
@@ -695,7 +966,6 @@ function App() {
               </ul>
             </section>
 
-            {/* 03 Teaching Philosophy */}
             <section className="section" id="philosophy">
               <div className="section-header">
                 <span className="section-number">03</span>
@@ -710,7 +980,6 @@ function App() {
               </div>
             </section>
 
-            {/* 04 Assessment */}
             <section className="section" id="assessment">
               <div className="section-header">
                 <span className="section-number">04</span>
@@ -733,7 +1002,6 @@ function App() {
               </div>
             </section>
 
-            {/* 05 Four-Week Overview */}
             <section className="section" id="schedule">
               <div className="section-header">
                 <span className="section-number">05</span>
@@ -765,7 +1033,10 @@ function App() {
                 </table>
               </div>
               <p style={{ marginTop: "1.25rem", fontSize: "0.87rem" }}>
-                For full session details, activities, and milestone prompts, see the <button onClick={() => setPage('sessions')} style={{ background: "none", border: "none", color: "var(--slate)", fontWeight: 600, cursor: "pointer", textDecoration: "underline", fontSize: "0.87rem", padding: 0 }}>Weekly Sessions</button> page.
+                For full session details, activities, and milestone prompts, see the{" "}
+                <button onClick={() => setPage('sessions')} style={{ background: "none", border: "none", color: "var(--slate)", fontWeight: 600, cursor: "pointer", textDecoration: "underline", fontSize: "0.87rem", padding: 0 }}>Weekly Sessions</button> page.
+                Have questions? Check the{" "}
+                <button onClick={() => setPage('faq')} style={{ background: "none", border: "none", color: "var(--slate)", fontWeight: 600, cursor: "pointer", textDecoration: "underline", fontSize: "0.87rem", padding: 0 }}>FAQ</button>.
               </p>
             </section>
 
@@ -773,9 +1044,7 @@ function App() {
         </div>
       )}
 
-      {/* ══════════════════════════════════
-           PAGE: WEEKLY SESSIONS
-          ══════════════════════════════════ */}
+      {/* ══ PAGE: WEEKLY SESSIONS ══ */}
       {page === 'sessions' && (
         <>
           <div className="sessions-page-header">
@@ -784,7 +1053,6 @@ function App() {
               <p className="sessions-page-desc">Each week's synchronous session, asynchronous activities, and milestone prompt. Everything you need to stay on track and succeed.</p>
             </div>
           </div>
-
           <div className="page-body">
             <main className="content">
               {weekData.map(w => <WeekSection key={w.id} w={w} />)}
@@ -792,6 +1060,9 @@ function App() {
           </div>
         </>
       )}
+
+      {/* ══ PAGE: FAQ ══ */}
+      {page === 'faq' && <FaqPage />}
 
       <footer className="page-footer">
         <span style={{color:'#F4A68A'}}>Rutgers</span> University · School of Communication &amp; Information · Data Science Concentration ·{" "}
